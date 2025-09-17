@@ -1,0 +1,39 @@
+Peak Detection and Analysis for Electrophysiology Data
+
+This repository contains Python code for detecting and analyzing action potential peaks from electrophysiological recordings stored in .abf files (Axon Binary Format).
+It is designed for use in ex vivo patch-clamp recordings and provides both sweep-level and mean-trace level analyses.
+
+### Features
+- ABF File Handling: Uses pyABF
+ to load and navigate electrophysiological data.
+- Preprocessing: Applies Gaussian filtering (scipy.ndimage.gaussian_filter1d) to smooth raw traces.
+- Baseline Estimation: Automatically extracts baseline voltage from pre-stimulus epochs.
+- Peak Detection: Detects peaks using scipy.signal.find_peaks with user-defined thresholds, standard deviation multipliers, and prominence values.
+- Peak Properties Extracted:
+- Peak time & voltage
+- Amplitude (relative to baseline)
+- Width at half-maximum
+- Threshold voltage & time (based on dV/dt)
+- Up-slope and down-slope (mV/ms)
+- Inter-spike intervals
+- Epoch Extraction: Identifies light-ON epochs (digital outputs) and links them to stimulation timing.
+- Sweep-Level Analysis: Calculates properties for every sweep and stores them in a structured DataFrame (df_peaks).
+- Mean-Trace Analysis: Computes the mean trace across sweeps and extracts average peak properties (df_mean_peaks).
+- Visualization:
+- Raw vs. Gaussian-filtered sweeps
+- Peak detection overlays with baseline, thresholds, and stimulation epochs
+- Mean trace with detected peaks and baseline reference
+
+### Data Export: Saves results into .csv files for further statistical analysis:
+df_peaks – individual sweep peak properties
+df_epochs – epoch timing and metadata
+df_mean_peaks – peak features from the averaged trace
+Figure Export: Saves annotated sweep plots and mean-trace plots as .png.
+
+### Dependencies
+
+pyabf
+numpy
+pandas
+matplotlib
+scipy
